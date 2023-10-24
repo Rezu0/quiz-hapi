@@ -9,8 +9,8 @@
   "routes": [
     { "handle": "filesystem" },
     {
-      "src": "/register",
-      "dest": "src/handler/register.js"
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
