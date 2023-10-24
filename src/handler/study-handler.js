@@ -25,7 +25,7 @@ const studyHandler = async (request, h) => {
     updatedAt,
   };
 
-  saveStudy(newStudy);
+  await saveStudy(newStudy);
 
   const response = h.response({
     status: 'success',
