@@ -18,8 +18,7 @@ const logout = async (request, h) => {
 
   try {
     const decoded = JWT.verify(splitToken[1], secretKey);
-    await updateLogin(decoded, false).then((res) => console.log(res))
-      .catch((err) => console.error(err));
+    await updateLogin(decoded, false);
 
     const response = h.response({
       status: 'success',
