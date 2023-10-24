@@ -4,7 +4,9 @@ require('dotenv').config();
 const uri = process.env.MONGODB_URI;
 const dbName = 'quiz';
 
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, {
+  maxPoolSize: 10,
+});
 
 const connect = async () => {
   try {
