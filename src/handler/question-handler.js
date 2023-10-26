@@ -1,5 +1,6 @@
 const { nanoid } = require("nanoid");
 const { ObjectId } = require("mongodb");
+const Joi = require('@hapi/joi');
 const { saveQuestions } = require("../questions");
 const { client, dbName } = require("../db/config");
 
@@ -60,11 +61,63 @@ const questionHandler = async (request, h) => {
 const questionAll = async (request, h) => {
   const db = client.db(dbName);
   const collection = db.collection('questions');
+  const { studyId } = request.query;
+  const objectIdSchema = Joi.string().length(24).hex();
+  const { error } = objectIdSchema.validate(studyId);
+
+  if (error) {
+    return h.response({ error: 'Maaf tidak ada yang cocok apa yang anda maksud' }).code(400);
+  }
 
   try {
-    const allQuestion = await collection.find().toArray();
-
-    if (allQuestion.length === 0) {
+    if (studyId) {
+      const pipeline = [
+        {
+          $match: {
+            objectStudyId: new ObjectId(studyId),
+          },
+        },
+        {
+          $lookup: {
+            from: 'studys',
+            localField: 'objectStudyId',
+            foreignField: '_id',
+            as: 'studyData',
+          },
+        },
+      ];
+      const aggregateQuestion = await collection.aggregate(pipeline).toArray();
+      // untuk cek apakah kosong atau tidak
+      if (aggregateQuestion.length === 0) {
+        const response = h.response({
+          status: 'success',
+          message: 'Data quetion kosong',
+        });
+        response.code(200);
+        return response;
+      }
+      // ini response ketika berhasil mendapatkan data dan tidak kosong
+      const response = h.response({
+        status: 'success',
+        message: 'Data berhasil didapatkan',
+        data: aggregateQuestion,
+      });
+      response.code(200);
+      return response;
+    }
+    // pipeline ketika tidak memakai query studyId di path url
+    const pipeline = [
+      {
+        $lookup: {
+          from: 'studys',
+          localField: 'objectStudyId',
+          foreignField: '_id',
+          as: 'studyData',
+        },
+      },
+    ];
+    const aggregateQuestion = await collection.aggregate(pipeline).toArray();
+    if (aggregateQuestion.length === 0) {
       const response = h.response({
         status: 'success',
         message: 'Data quetion kosong',
@@ -72,12 +125,11 @@ const questionAll = async (request, h) => {
       response.code(200);
       return response;
     }
-
     const response = h.response({
       status: 'success',
       message: 'Data question berhasil didapatkan',
       data: {
-        question: allQuestion,
+        question: aggregateQuestion,
       },
     });
     response.code(200);
