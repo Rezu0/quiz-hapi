@@ -47,7 +47,7 @@ const questionHandler = async (request, h) => {
     updatedAt,
   };
 
-  saveQuestions(newQuestion);
+  await saveQuestions(newQuestion);
 
   const response = h.response({
     status: 'success',

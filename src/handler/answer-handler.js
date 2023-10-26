@@ -129,7 +129,7 @@ const userAnwerHandler = async (request, h) => {
     updatedAt,
   };
 
-  saveAnswerUser(userAnswer);
+  await saveAnswerUser(userAnswer);
 
   const response = h.response({
     status: 'success',
