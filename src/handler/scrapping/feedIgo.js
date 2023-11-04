@@ -2,24 +2,24 @@ const cheerio = require('cheerio');
 const http = require('http');
 require('dotenv').config();
 
-const javDesu = async (request, h) => {
+const igoDesu = async (request, h) => {
   try {
     const options = {
       rejectUnauthorized: false,
     };
     const agent = new http.Agent(options);
-    const res = await fetch(`${process.env.link_javadesu}`, { agent });
+    const res = await fetch(`${process.env.link_igodesu}`, { agent });
     if (!res.ok) {
       throw new Error('Gagal');
     }
     const data = await res.text();
     const $ = cheerio.load(data);
-    // javdesu
-    const title = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('title')).get();
-    const link = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('href')).get();
+    // igodesu
+    const title = $('.entry-title').children().map((index, element) => $(element).text()).get();
+    const link = $('.entry-title').children().map((index, element) => $(element).attr('href')).get();
     const response = h.response({
       status: 'success',
-      message: 'API Feed Javdesu',
+      message: 'API Feed Igodesu',
       data: {
         _title: title,
         _link: link,
@@ -32,4 +32,4 @@ const javDesu = async (request, h) => {
   }
 };
 
-module.exports = { javDesu };
+module.exports = { igoDesu };
