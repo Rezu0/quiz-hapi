@@ -12,6 +12,7 @@ const { questionHandler, questionAll } = require('./handler/question-handler');
 const { register } = require('./handler/register');
 const { studyHandler, studyAll } = require('./handler/study-handler');
 const { aggregateUserAnswer } = require('./answer');
+const { javDesu } = require('./handler/scrapping/feedJav');
 
 const routes = [
   {
@@ -150,6 +151,14 @@ const routes = [
     method: 'GET',
     path: '/user/{username}/answer',
     handler: userAllGetAnswer,
+    options: {
+      auth: false,
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/feed/javdesu',
+    handler: javDesu,
     options: {
       auth: false,
     },
