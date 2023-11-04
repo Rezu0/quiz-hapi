@@ -166,7 +166,7 @@ const routes = [
   },
   {
     method: 'GET',
-    path: 'api/feed/igodesu',
+    path: '/api/feed/igodesu',
     handler: igoDesu,
     options: {
       auth: false,
