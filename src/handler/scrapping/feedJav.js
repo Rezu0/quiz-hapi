@@ -23,6 +23,7 @@ const javDesu = async (request, h) => {
       data: {
         _title: title,
         _link: link,
+        feed: process.env.link_javadesu,
       },
     });
     response.code(200);
