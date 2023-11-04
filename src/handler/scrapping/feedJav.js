@@ -8,7 +8,7 @@ const javDesu = async (request, h) => {
       rejectUnauthorized: false,
     };
     const agent = new http.Agent(options);
-    const res = await fetch(process.env.link_igodesu, { agent });
+    const res = await fetch('https://igodesu.tv/', { agent });
     if (!res.ok) {
       throw new Error('Gagal');
     }
