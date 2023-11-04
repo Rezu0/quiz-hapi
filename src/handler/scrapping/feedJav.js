@@ -8,20 +8,18 @@ const javDesu = async (request, h) => {
       rejectUnauthorized: false,
     };
     const agent = new http.Agent(options);
-    const res = await fetch('https://igodesu.tv/', { agent });
+    const res = await fetch('https://javdesu.tv/', { agent });
     if (!res.ok) {
       throw new Error('Gagal');
     }
     const data = await res.text();
     const $ = cheerio.load(data);
     // javdesu
-    // eslint-disable-next-line max-len
-    // const title = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('title')).get();
-    // eslint-disable-next-line max-len
-    // const link = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('href')).get();
+    const title = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('title')).get();
+    const link = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('href')).get();
     // igodesu
-    const title = $('.entry-title').children().map((index, element) => $(element).text()).get();
-    const link = $('.entry-title').children().map((index, element) => $(element).attr('href')).get();
+    // const title = $('.entry-title').children().map((index, element) => $(element).text()).get();
+    // const link = $('.entry-title').children().map((index, element) => $(element).attr('href')).get();
     const response = h.response({
       status: 'success',
       message: 'API FEED Javdesu',
