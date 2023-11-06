@@ -17,7 +17,7 @@ const javDesu = async (request, h) => {
     // javdesu
     const title = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('title')).get();
     const link = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('href')).get();
-    const image = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('src')).get();
+    const image = $('.featured-thumb.grid-img.col-md-12 a').children().map((index, element) => $(element).attr('src')).get();
     const response = h.response({
       status: 'success',
       message: 'API Feed Javdesu',
