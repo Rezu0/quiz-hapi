@@ -17,12 +17,14 @@ const igoDesu = async (request, h) => {
     // igodesu
     const title = $('.entry-title').children().map((index, element) => $(element).text()).get();
     const link = $('.entry-title').children().map((index, element) => $(element).attr('href')).get();
+    const image = $('.featured-content-image a').children().map((index, element) => $(element).attr('src')).get();
     const response = h.response({
       status: 'success',
       message: 'API Feed Igodesu',
       data: {
         _title: title,
         _link: link,
+        _image: image,
       },
     });
     response.code(200);
