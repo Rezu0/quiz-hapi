@@ -12,7 +12,7 @@ const { questionHandler, questionAll } = require('./handler/question-handler');
 const { register } = require('./handler/register');
 const { studyHandler, studyAll } = require('./handler/study-handler');
 const { aggregateUserAnswer } = require('./answer');
-const { javDesu } = require('./handler/scrapping/feedJav');
+const { javDesuMosaic } = require('./handler/scrapping/feedJav');
 const { igoDesu } = require('./handler/scrapping/feedIgo');
 
 const routes = [
@@ -158,8 +158,16 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/api/feed/javdesu',
-    handler: javDesu,
+    path: '/api/feed/javdesu/mosaic',
+    handler: javDesuMosaic,
+    options: {
+      auth: false,
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/feed/javdesu/cencored',
+    handler: () => {},
     options: {
       auth: false,
     },
