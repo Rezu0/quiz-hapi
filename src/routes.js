@@ -12,7 +12,12 @@ const { questionHandler, questionAll } = require('./handler/question-handler');
 const { register } = require('./handler/register');
 const { studyHandler, studyAll } = require('./handler/study-handler');
 const { aggregateUserAnswer } = require('./answer');
-const { javDesuMosaic, javDesuCencored } = require('./handler/scrapping/feedJav');
+const {
+  javDesuMosaic,
+  javDesuCensored,
+  javDesuUncensored,
+  javDesuUncensoredLeaked,
+} = require('./handler/scrapping/feedJav');
 const { igoDesu } = require('./handler/scrapping/feedIgo');
 
 const routes = [
@@ -167,7 +172,23 @@ const routes = [
   {
     method: 'GET',
     path: '/api/feed/javdesu/censored',
-    handler: javDesuCencored,
+    handler: javDesuCensored,
+    options: {
+      auth: false,
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/feed/javdesu/uncensored',
+    handler: javDesuUncensored,
+    options: {
+      auth: false,
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/feed/javdesu/uncensored-leaked',
+    handler: javDesuUncensoredLeaked,
     options: {
       auth: false,
     },
