@@ -166,7 +166,7 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/api/feed/javdesu/cencored',
+    path: '/api/feed/javdesu/censored',
     handler: javDesuCencored,
     options: {
       auth: false,
