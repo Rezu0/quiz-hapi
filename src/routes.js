@@ -19,6 +19,7 @@ const {
   javDesuUncensoredLeaked,
 } = require('./handler/scrapping/feedJav');
 const { igoDesu } = require('./handler/scrapping/feedIgo');
+const { devIgoDesu } = require('./handler/scrapping/dev/devIgo');
 
 const routes = [
   {
@@ -197,6 +198,14 @@ const routes = [
     method: 'GET',
     path: '/api/feed/igodesu',
     handler: igoDesu,
+    options: {
+      auth: false,
+    },
+  },
+  {
+    method: 'GET',
+    path: 'api/dev/igodesu',
+    handler: devIgoDesu,
     options: {
       auth: false,
     },
