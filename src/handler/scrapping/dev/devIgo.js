@@ -22,9 +22,9 @@ const devIgoDesu = async (request, h) => {
       status: 'success',
       message: 'API Feed Igodesu',
       data: {
-        _title: title,
-        _link: link,
-        _image: image,
+        _title: title.reverse(),
+        _link: link.reverse(),
+        _image: image.reverse(),
       },
     });
     response.code(200);
