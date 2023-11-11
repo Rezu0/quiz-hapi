@@ -22,9 +22,9 @@ const javDesuUncensoredLeaked = async (request, h) => {
       status: 'success',
       message: 'API Feed Javdesu Uncensored Leaked',
       data: {
-        _title: title,
-        _link: link,
-        _image: image,
+        _title: title.reverse(),
+        _link: link.reverse(),
+        _image: image.reverse(),
       },
     });
     response.code(200);
@@ -54,9 +54,9 @@ const javDesuUncensored = async (request, h) => {
       status: 'success',
       message: 'API Feed Javdesu Uncensored',
       data: {
-        _title: title,
-        _link: link,
-        _image: image,
+        _title: title.reverse(),
+        _link: link.reverse(),
+        _image: image.reverse(),
       },
     });
     response.code(200);
@@ -86,9 +86,9 @@ const javDesuCensored = async (request, h) => {
       status: 'success',
       message: 'API Feed Javdesu Cencored',
       data: {
-        _title: title,
-        _link: link,
-        _image: image,
+        _title: title.reverse(),
+        _link: link.reverse(),
+        _image: image.reverse(),
       },
     });
     response.code(200);
@@ -118,9 +118,9 @@ const javDesuMosaic = async (request, h) => {
       status: 'success',
       message: 'API Feed Javdesu Mosaic',
       data: {
-        _title: title,
-        _link: link,
-        _image: image,
+        _title: title.reverse(),
+        _link: link.reverse(),
+        _image: image.reverse(),
       },
     });
     response.code(200);
