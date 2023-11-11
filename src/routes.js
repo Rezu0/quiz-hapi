@@ -204,7 +204,7 @@ const routes = [
   },
   {
     method: 'GET',
-    path: 'api/dev/igodesu',
+    path: '/api/dev/igodesu',
     handler: devIgoDesu,
     options: {
       auth: false,
