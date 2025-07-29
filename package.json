@@ -28,6 +28,7 @@
     "hapi-auth-jwt2": "^10.4.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
-    "nanoid": "^3.3.3"
+    "nanoid": "^3.3.3",
+    "puppeteer": "^22.14.0"
   }
 }

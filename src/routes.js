@@ -20,6 +20,7 @@ const {
 } = require('./handler/scrapping/feedJav');
 const { igoDesu } = require('./handler/scrapping/feedIgo');
 const { devIgoDesu } = require('./handler/scrapping/dev/devIgo');
+const { twitterScrapping } = require('./handler/scrapping/dev/twitter');
 
 const routes = [
   {
@@ -206,6 +207,14 @@ const routes = [
     method: 'GET',
     path: '/api/dev/igodesu',
     handler: devIgoDesu,
+    options: {
+      auth: false,
+    },
+  },
+  {
+    method: 'GET',
+    path: '/api/coba',
+    handler: twitterScrapping,
     options: {
       auth: false,
     },
