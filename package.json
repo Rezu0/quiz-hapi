@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "start": "node server.js",
     "start-dev": "nodemon server.js",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "postinstall": "node -v"
   },
   "keywords": [],
   "author": "",
