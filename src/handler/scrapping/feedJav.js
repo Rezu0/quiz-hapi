@@ -78,17 +78,41 @@ const javDesuCensored = async (request, h) => {
     }
     const data = await res.text();
     const $ = cheerio.load(data);
-    // javdesu cencored
-    const title = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('title')).get();
-    const link = $('.featured-thumb.grid-img.col-md-12').children().map((index, element) => $(element).attr('href')).get();
-    const image = $('.featured-thumb.grid-img.col-md-12 a').children().map((index, element) => $(element).attr('src')).get();
+
+    const gridSelector = '.grid.gap-x-4.gap-y-8.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3.xl\\:grid-cols-4';
+
+    const scrapingTitle = $(gridSelector).children().map((index, element) => {
+      const title = $(element).find('h3').text().trim();
+
+      return title;
+    }).get();
+
+    const scrapingLink = $(gridSelector).children().map((index, element) => {
+      const link = `https://javdesu.tv${$(element).find('a').attr('href')}`;
+
+      return link;
+    }).get();
+
+    const scrapingImage = $(gridSelector).children().map((i, el) => {
+      const imageSet = $(el).find('img').attr('srcset');
+
+      let image = null;
+      if (imageSet) {
+        // eslint-disable-next-line no-shadow
+        const imageTrim = imageSet.split(',').map((i) => i.trim());
+        image = `https://javdesu.tv${imageTrim.reverse()[0]?.split(' ')[0]}`; // ambil URL-nya aja
+      }
+
+      return image;
+    }).get();
+
     const response = h.response({
       status: 'success',
       message: 'API Feed Javdesu Cencored',
       data: {
-        _title: title.reverse(),
-        _link: link.reverse(),
-        _image: image.reverse(),
+        _title: scrapingTitle.reverse(),
+        _link: scrapingLink.reverse(),
+        _image: scrapingImage.reverse(),
       },
     });
     response.code(200);
